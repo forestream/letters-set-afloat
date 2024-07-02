@@ -39,10 +39,23 @@
 	top: 12px;
 	right: 12px;
 	font-size: 16px;
-	color: #545454;
+	color: #666666;
 	font-weight: 700;
 	padding: 8px;
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
+
+	&:hover {
+		color: #323232;
+	}
+}
+
+.error {
+	color: #ffe696;
+	font-size: 14px;
+	font-weight: 700;
+	position: absolute;
+	right: 0;
+	bottom: -16px;
 }
