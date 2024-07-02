@@ -1,5 +1,6 @@
 "use client";
 
+import styles from "./background.module.css";
 import { Reflection, SUN_RADIUS } from "@/lib/constants/background";
 import { generateGlitterData } from "@/lib/utils/background";
 import { useEffect, useRef } from "react";
@@ -156,5 +157,9 @@ export default function Background() {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	return <canvas ref={canvasRef}>Background</canvas>;
+	return (
+		<canvas ref={canvasRef} className={styles.background}>
+			Background
+		</canvas>
+	);
 }
