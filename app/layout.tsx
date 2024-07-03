@@ -12,17 +12,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 	children,
-	letterModal,
 }: Readonly<{
 	children: React.ReactNode;
-	letterModal: React.ReactNode;
 }>) {
 	return (
 		<html lang="ko">
-			<body className={inter.className}>
-				{children}
-				{letterModal}
-			</body>
+			<body className={inter.className}>{children}</body>
 		</html>
 	);
 }

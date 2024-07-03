@@ -27,8 +27,6 @@ export default async function LetterById({ letterId }: LetterByIdProps) {
 		letter.replies.push({ reply: reply.get("reply"), id: reply.id })
 	);
 
-	console.log(letter.replies);
-
 	return (
 		<div className={styles.outer}>
 			<p className={styles.letter}>{letter.letter}</p>
