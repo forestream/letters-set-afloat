@@ -1,0 +1,19 @@
+.outer {
+	position: absolute;
+	inset: 0;
+	overflow-y: scroll;
+	scrollbar-width: none;
+	z-index: 1;
+}
+
+.inner {
+	margin: 0 0 100vh 0;
+	padding: 20px;
+}
+
+.letter {
+	width: 210px;
+	height: 290px;
+	background-color: rgba(255, 255, 255, 0.85);
+	padding: 20px;
+}

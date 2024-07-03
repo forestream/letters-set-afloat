@@ -31,6 +31,7 @@ export default function Foreground() {
 
 		const formData = new FormData(e.target as HTMLFormElement);
 		const letter = formData.get("letter");
+		console.log(letter);
 
 		try {
 			setIsPending(true);

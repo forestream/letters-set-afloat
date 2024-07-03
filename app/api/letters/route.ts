@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 	try {
 		await addDoc(collection(db, "letters"), {
 			sentAt: Timestamp.now(),
-			body,
+			letter: body.letter,
 		});
 
 		return new Response(null, {
