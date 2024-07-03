@@ -8,13 +8,13 @@ export default function Modal({ children }: PropsWithChildren) {
 	const router = useRouter();
 	const ref = useRef<HTMLDivElement>(null);
 
-	const handleClick: MouseEventHandler = (e) => {
+	const handleMouseDown: MouseEventHandler = (e) => {
 		if (!(e.target as HTMLElement).contains(ref.current)) return;
 		router.back();
 	};
 
 	return (
-		<div onClick={handleClick} ref={ref} className={styles.outer}>
+		<div onMouseDown={handleMouseDown} ref={ref} className={styles.outer}>
 			{children}
 		</div>
 	);
