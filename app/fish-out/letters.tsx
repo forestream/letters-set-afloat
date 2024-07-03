@@ -1,6 +1,8 @@
 import { Timestamp, collection, getDocs, query } from "firebase/firestore";
 import styles from "./letters.module.css";
 import { db } from "@/lib/firebase/firebase";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 interface Letter {
 	id: string;
@@ -17,15 +19,18 @@ export default async function Letters() {
 		const { letter, sentAt } = doc.data();
 		letters.push({ id: doc.id, letter, sentAt: sentAt.toDate() });
 	});
-	console.log(letters);
 
 	return (
 		<section className={styles.outer}>
 			<div className={styles.inner}>
 				{letters.map((letter) => (
-					<article key={letter.id} className={styles.letter}>
-						{letter.letter}
-					</article>
+					<Link
+						key={letter.id}
+						href={`/fish-out/${letter.id}`}
+						className={styles.letterLink}
+					>
+						<article className={styles.letter}>{letter.letter}</article>
+					</Link>
 				))}
 			</div>
 		</section>
