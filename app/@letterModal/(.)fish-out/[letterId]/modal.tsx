@@ -1,19 +1,20 @@
 "use client";
 
-import { MouseEventHandler, PropsWithChildren } from "react";
+import { MouseEventHandler, PropsWithChildren, useRef } from "react";
 import styles from "./modal.module.css";
 import { useRouter } from "next/navigation";
 
 export default function Modal({ children }: PropsWithChildren) {
 	const router = useRouter();
+	const ref = useRef<HTMLDivElement>(null);
 
 	const handleClick: MouseEventHandler = (e) => {
-		e.stopPropagation();
+		if (!(e.target as HTMLElement).contains(ref.current)) return;
 		router.back();
 	};
 
 	return (
-		<div onClick={handleClick} className={styles.outer}>
+		<div onClick={handleClick} ref={ref} className={styles.outer}>
 			{children}
 		</div>
 	);
