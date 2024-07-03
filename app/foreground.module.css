@@ -3,6 +3,22 @@
 	inset: 0;
 }
 
+.fishOut {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color: #ffe696;
+	text-decoration: none;
+	font-weight: 700;
+	padding: 12px;
+	border-radius: 8px;
+	transition: background-color 70ms ease-in;
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+}
+
 .form {
 	position: absolute;
 	bottom: 100px;

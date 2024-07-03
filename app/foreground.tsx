@@ -8,6 +8,7 @@ import {
 } from "react";
 import styles from "./foreground.module.css";
 import { postLetter } from "@/lib/apis/main";
+import Link from "next/link";
 
 export default function Foreground() {
 	const [letter, setLetter] = useState("");
@@ -47,6 +48,9 @@ export default function Foreground() {
 
 	return (
 		<div className={styles.outer}>
+			<Link href="/fish-out" className={styles.fishOut}>
+				떠밀려 온 편지
+			</Link>
 			<form onSubmit={handleSubmit} className={styles.form}>
 				<textarea
 					name="letter"
