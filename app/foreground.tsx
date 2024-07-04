@@ -9,6 +9,7 @@ import {
 import styles from "./foreground.module.css";
 import { postLetter } from "@/lib/apis/main";
 import Link from "next/link";
+import Spinner from "./ui/spinner";
 
 export default function Foreground() {
 	const [letter, setLetter] = useState("");
@@ -58,9 +59,15 @@ export default function Foreground() {
 					value={letter}
 					className={styles.letter}
 				/>
-				<button className={styles.float} disabled={isPending}>
-					띄우기
-				</button>
+				{isPending ? (
+					<div className={styles.spinner}>
+						<Spinner />
+					</div>
+				) : (
+					<button className={styles.float} disabled={isPending}>
+						띄우기
+					</button>
+				)}
 				{error && <p className={styles.error}>{error}</p>}
 			</form>
 		</div>
