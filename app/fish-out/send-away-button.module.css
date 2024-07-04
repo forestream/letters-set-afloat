@@ -1,0 +1,15 @@
+.sendAway {
+	padding: 8px;
+	background: none;
+	border: none;
+	font-size: 20px;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+	position: relative;
+	transition: margin-top 100ms ease-in-out;
+
+	&:hover {
+		margin-top: -2px;
+	}
+}

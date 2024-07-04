@@ -1,28 +1,23 @@
-import { Timestamp, collection, getDocs, query } from "firebase/firestore";
-import styles from "./letters.module.css";
-import { db } from "@/lib/firebase/firebase";
-import { redirect } from "next/navigation";
-import Link from "next/link";
+"use client";
 
-interface Letter {
-	id: string;
-	letter: string;
-	sentAt: Timestamp;
+import styles from "./letters.module.css";
+import Link from "next/link";
+import SendAwayButton from "./send-away-button";
+import { useState } from "react";
+import { Letter } from "../actions.type";
+
+interface LettersProps {
+	letters: Letter[];
 }
 
-export default async function Letters() {
-	const q = query(collection(db, "letters"));
+export default function Letters({ letters: initLetters }: LettersProps) {
+	const [letters, setLetters] = useState(initLetters);
 
-	const querySnapshot = await getDocs(q);
-	const letters: Letter[] = [];
-	querySnapshot.forEach((doc) => {
-		const { letter, sentAt } = doc.data();
-		letters.push({ id: doc.id, letter, sentAt: sentAt.toDate() });
-	});
+	const handleLoadLetters = (next: Letter[]) => setLetters(() => [...next]);
 
 	return (
 		<section className={styles.outer}>
-			<div className={styles.inner}>
+			<div className={styles.letters}>
 				{letters.map((letter) => (
 					<Link
 						key={letter.id}
@@ -32,6 +27,14 @@ export default async function Letters() {
 						<article className={styles.letter}>{letter.letter}</article>
 					</Link>
 				))}
+			</div>
+			<div className={styles.buttonContainer}>
+				<SendAwayButton
+					onLoadLetters={handleLoadLetters}
+					lastLetterId={letters[letters.length - 1].id}
+				>
+					흘려 보내기
+				</SendAwayButton>
 			</div>
 		</section>
 	);
