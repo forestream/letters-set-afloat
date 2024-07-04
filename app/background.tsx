@@ -5,8 +5,9 @@ import { Reflection, SUN_RADIUS } from "@/lib/constants/background";
 import { generateGlitterData } from "@/lib/utils/background";
 import { useEffect, useRef } from "react";
 
-const glitters = generateGlitterData(40);
+const glitters = generateGlitterData(60);
 
+let request = 0;
 function draw(ctx: CanvasRenderingContext2D) {
 	const canvas = ctx.canvas;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -113,12 +114,15 @@ function draw(ctx: CanvasRenderingContext2D) {
 	ctx.fill();
 
 	// glitter
-	glitters.forEach((glitter) => {
+	glitters.forEach((glitter, i) => {
 		const x = glitter.x * canvas.width;
 		const y = glitter.y * canvas.height;
-		const size = glitter.size * Math.max(movement, 0);
+		const size =
+			i % 2
+				? glitter.size * Math.abs(movement + glitter.irregularity - 0.5)
+				: glitter.size * Math.abs(movement - glitter.irregularity - 0.5);
 
-		ctx.fillStyle = "rgb(255 230 200 / 70%)";
+		ctx.fillStyle = "rgb(255 230 200)";
 		ctx.shadowBlur = 0;
 		ctx.beginPath();
 		ctx.moveTo(x, y);
@@ -129,7 +133,8 @@ function draw(ctx: CanvasRenderingContext2D) {
 		ctx.fill();
 	});
 
-	requestAnimationFrame(() => draw(ctx));
+	cancelAnimationFrame(request);
+	request = requestAnimationFrame(() => draw(ctx));
 }
 
 export default function Background() {

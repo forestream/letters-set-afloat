@@ -4,6 +4,7 @@ export function generateGlitterData(amount: number) {
 		.map(() => ({
 			x: Math.random(),
 			y: Math.random(),
-			size: Math.random() * 10,
+			size: Math.random() * 4,
+			irregularity: Math.random(),
 		}));
 }
