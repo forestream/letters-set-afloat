@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./send-away-button.module.css";
-import { PropsWithChildren, Suspense, useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import { loadLettersWithCursor } from "../actions";
 import { Letter } from "../actions.type";
 import Spinner from "../ui/spinner";

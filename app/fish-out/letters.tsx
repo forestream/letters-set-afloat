@@ -13,20 +13,22 @@ interface LettersProps {
 export default function Letters({ letters: initLetters }: LettersProps) {
 	const [letters, setLetters] = useState(initLetters);
 
-	const handleLoadLetters = (next: Letter[]) => setLetters(() => [...next]);
+	const handleLoadLetters = (next: Letter[]) => setLetters(() => next);
 
 	return (
 		<section className={styles.outer}>
-			<div className={styles.letters}>
-				{letters.map((letter) => (
-					<Link
-						key={letter.id}
-						href={`/fish-out/${letter.id}`}
-						className={styles.letterLink}
-					>
-						<article className={styles.letter}>{letter.letter}</article>
-					</Link>
-				))}
+			<div className={styles.lettersContainer}>
+				<div className={styles.letters}>
+					{letters.map((letter) => (
+						<Link
+							key={letter.id}
+							href={`/fish-out/${letter.id}`}
+							className={styles.letterLink}
+						>
+							<article className={styles.letter}>{letter.letter}</article>
+						</Link>
+					))}
+				</div>
 			</div>
 			<div className={styles.buttonContainer}>
 				<SendAwayButton

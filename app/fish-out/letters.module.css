@@ -1,14 +1,24 @@
 .outer {
 	position: absolute;
 	inset: 0;
-	overflow-y: scroll;
-	scrollbar-width: none;
+	overflow: hidden;
 	z-index: 1;
 }
 
+.lettersContainer {
+	width: 100%;
+	overflow-x: scroll;
+	scrollbar-width: none;
+	display: flex;
+	justify-content: flex-start;
+	scroll-snap-type: x mandatory;
+}
+
 .letters {
+	scroll-snap-align: center;
 	max-width: 960px;
-	margin: 0 auto;
+	margin: 0 50vw;
+	flex-shrink: 0;
 	padding: 60px 20px 20px;
 	display: flex;
 	gap: 60px 48px;
@@ -43,4 +53,5 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 24px;
+	width: 100%;
 }
