@@ -1,11 +1,14 @@
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import LetterById from "./letter-by-id";
 import Modal from "@/app/ui/modal";
 
-export default function Page({ params }: Params) {
+interface PageProps {
+	params: { [key: string]: string };
+}
+
+export default function Page({ params }: PageProps) {
 	return (
-		<Modal>
-			<LetterById letterId={params.letterId} />;
+		<Modal routerPath="/fish-out">
+			<LetterById letterId={params.letterId} />
 		</Modal>
 	);
 }
