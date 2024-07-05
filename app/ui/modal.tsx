@@ -4,7 +4,14 @@ import { MouseEventHandler, PropsWithChildren, useRef } from "react";
 import styles from "./modal.module.css";
 import { useRouter } from "next/navigation";
 
-export default function Modal({ children }: PropsWithChildren) {
+interface ModalProps {
+	zIndex?: number;
+}
+
+export default function Modal({
+	children,
+	zIndex = 2,
+}: PropsWithChildren<ModalProps>) {
 	const router = useRouter();
 	const ref = useRef<HTMLDivElement>(null);
 
@@ -14,7 +21,12 @@ export default function Modal({ children }: PropsWithChildren) {
 	};
 
 	return (
-		<div onMouseDown={handleMouseDown} ref={ref} className={styles.outer}>
+		<div
+			onMouseDown={handleMouseDown}
+			ref={ref}
+			className={styles.outer}
+			style={{ zIndex }}
+		>
 			{children}
 		</div>
 	);

@@ -3,6 +3,7 @@ import styles from "./letter-by-id.module.css";
 import { db } from "@/lib/firebase/firebase";
 import Form from "./form";
 import ReplyButton from "./reply-button";
+import ReportButton from "./report-button";
 
 interface LetterByIdProps {
 	letterId: string;
@@ -36,6 +37,9 @@ export default async function LetterById({ letterId }: LetterByIdProps) {
 						{reply.reply}
 					</p>
 				))}
+			</div>
+			<div className={styles.report}>
+				<ReportButton />
 			</div>
 			<Form letterId={letterId}>
 				<textarea className={styles.replyInput} name="reply" />

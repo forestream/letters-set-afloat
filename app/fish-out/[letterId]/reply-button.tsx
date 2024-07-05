@@ -16,7 +16,7 @@ export default function ReplyButton() {
 
 	return (
 		<button className={styles.button} disabled={pending}>
-			{pending ? "보내는 중" : "글 적기"}
+			글 적기
 		</button>
 	);
 }
