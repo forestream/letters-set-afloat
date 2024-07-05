@@ -1,5 +1,14 @@
+import clsx from "clsx";
 import styles from "./spinner.module.css";
 
-export default function Spinner() {
-	return <div className={styles.spinner}></div>;
+interface SpinnerProps {
+	color?: "white" | "gray";
+}
+
+export default function Spinner({ color = "gray" }: SpinnerProps) {
+	return (
+		<div
+			className={clsx(styles.spinner, { [styles[color]]: color === "white" })}
+		></div>
+	);
 }

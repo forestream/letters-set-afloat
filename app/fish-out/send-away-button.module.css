@@ -13,3 +13,14 @@
 		margin-top: -2px;
 	}
 }
+
+.error {
+	color: #ffe696;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.spinner {
+	width: 24px;
+	height: 24px;
+}

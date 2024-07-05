@@ -10,7 +10,7 @@ export default function ReplyButton() {
 	if (pending)
 		return (
 			<div className={styles.spinner}>
-				<Spinner />;
+				<Spinner />
 			</div>
 		);
 
