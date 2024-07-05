@@ -15,6 +15,7 @@ import {
 	startAfter,
 } from "firebase/firestore";
 import { Letter } from "./actions.type";
+import { revalidatePath } from "next/cache";
 
 export async function replyToLetter(
 	letterId: string,
@@ -28,6 +29,7 @@ export async function replyToLetter(
 			reply,
 			repliedAt: Timestamp.now(),
 		});
+		revalidatePath("/fish-out");
 
 		return { ...state, success: true, error: null };
 	} catch (error) {
