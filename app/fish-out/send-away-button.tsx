@@ -59,7 +59,7 @@ export default function SendAwayButton({
 			<button onClick={handleLoadLetters} className={styles.sendAway}>
 				{children}
 			</button>
-			{error && <p className={styles.error}>{"더 볼 편지가 없습니다."}</p>}
+			{error && <p className={styles.error}>{"더 읽을 편지가 없습니다."}</p>}
 		</>
 	);
 }

@@ -82,5 +82,14 @@
 	font-weight: 700;
 	position: absolute;
 	right: 0;
-	bottom: -16px;
+	top: -24px;
+}
+
+.toast {
+	color: #ffe696;
+	font-size: 14px;
+	font-weight: 700;
+	position: absolute;
+	right: 0;
+	top: -24px;
 }

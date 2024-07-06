@@ -10,11 +10,13 @@ import styles from "./foreground.module.css";
 import { postLetter } from "@/lib/apis/main";
 import Link from "next/link";
 import Spinner from "./ui/spinner";
+import useToast from "@/lib/hooks/useToast";
 
 export default function Foreground() {
 	const [letter, setLetter] = useState("");
 	const [isPending, setIsPending] = useState(false);
 	const [error, setError] = useState("");
+	const [Toast, showToast] = useToast(4000);
 
 	const longEnough = letter.trim().length > 4;
 
@@ -38,6 +40,7 @@ export default function Foreground() {
 			setIsPending(true);
 			await postLetter({ letter });
 			setLetter("");
+			showToast();
 		} catch (error: any) {
 			setError(error);
 			console.error("Error: " + error);
@@ -68,6 +71,7 @@ export default function Foreground() {
 					</button>
 				)}
 				{error && <p className={styles.error}>{error}</p>}
+				<Toast className={styles.toast}>편지를 띄웠습니다.</Toast>
 			</form>
 		</div>
 	);

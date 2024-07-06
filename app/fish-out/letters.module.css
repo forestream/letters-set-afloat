@@ -1,7 +1,9 @@
 .outer {
 	position: absolute;
 	inset: 0;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	scrollbar-width: none;
 	z-index: 1;
 }
 
@@ -62,6 +64,6 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin-top: 24px;
+	margin: 24px 0;
 	width: 100%;
 }
