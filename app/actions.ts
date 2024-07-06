@@ -14,12 +14,12 @@ import {
 	query,
 	startAfter,
 } from "firebase/firestore";
-import { Letter } from "./actions.type";
+import { Letter, State } from "./actions.type";
 import { revalidatePath } from "next/cache";
 
 export async function replyToLetter(
 	letterId: string,
-	state: any,
+	state: State,
 	formData: FormData
 ) {
 	const reply = formData.get("reply");
@@ -80,5 +80,17 @@ export async function reportLetter(letterId: string) {
 		return { success: true, error: null };
 	} catch (error) {
 		return { success: false, error };
+	}
+}
+
+export async function leaveContact(state: State, formData: FormData) {
+	try {
+		await addDoc(collection(db, "contacts"), {
+			message: formData.get("message"),
+			sentAt: Timestamp.now(),
+		});
+		return { ...state, success: true, error: null };
+	} catch (error) {
+		return { ...state, success: false, error: String(error) };
 	}
 }
