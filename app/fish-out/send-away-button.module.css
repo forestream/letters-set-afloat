@@ -1,0 +1,26 @@
+.sendAway {
+	padding: 8px;
+	background: none;
+	border: none;
+	font-size: 20px;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+	position: relative;
+	transition: margin-top 100ms ease-in-out;
+
+	&:hover {
+		margin-top: -2px;
+	}
+}
+
+.error {
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.spinner {
+	width: 24px;
+	height: 24px;
+}

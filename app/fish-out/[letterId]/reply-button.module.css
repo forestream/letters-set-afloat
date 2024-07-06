@@ -1,0 +1,25 @@
+.button {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	font-size: 16px;
+	color: #777777;
+	font-weight: 700;
+	padding: 8px;
+	border: none;
+	cursor: pointer;
+	background-color: transparent;
+
+	&:hover {
+		color: #323232;
+	}
+}
+
+.spinner {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	margin: 8px;
+}

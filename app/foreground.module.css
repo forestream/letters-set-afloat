@@ -1,0 +1,95 @@
+.outer {
+	position: absolute;
+	inset: 0;
+}
+
+.fishOut {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	color: #ffe696;
+	text-decoration: none;
+	font-weight: 700;
+	padding: 12px;
+	border-radius: 8px;
+	transition: background-color 70ms ease-in;
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+}
+
+.form {
+	position: absolute;
+	bottom: 100px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90vw;
+	max-width: 800px;
+}
+
+.letter {
+	max-height: 30vh;
+	min-height: 120px;
+	width: 100%;
+	height: 100%;
+	resize: vertical;
+	font-size: 20px;
+	font-family: initial;
+	padding: 16px 64px 16px 16px;
+	background-color: rgba(255, 255, 255, 0.6);
+	scrollbar-width: none;
+	border-radius: 8px;
+
+	&:focus-visible {
+		outline: none;
+	}
+
+	@media (max-width: 767px) {
+		bottom: 32px;
+	}
+}
+
+.float {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	font-size: 16px;
+	color: #666666;
+	font-weight: 700;
+	padding: 8px;
+	border: none;
+	cursor: pointer;
+	background-color: transparent;
+
+	&:hover {
+		color: #323232;
+	}
+}
+
+.spinner {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	margin: 8px;
+}
+
+.error {
+	color: #ffe696;
+	font-size: 14px;
+	font-weight: 700;
+	position: absolute;
+	right: 0;
+	top: -24px;
+}
+
+.toast {
+	color: #ffe696;
+	font-size: 14px;
+	font-weight: 700;
+	position: absolute;
+	right: 0;
+	top: -24px;
+}
