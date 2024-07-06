@@ -69,15 +69,19 @@ export default function Letters({ letters: initLetters }: LettersProps) {
 				</div>
 			</div>
 			<div className={styles.buttonContainer}>
-				<SendAwayButton
-					initializePosition={initializePosition}
-					swipeIn={swipeIn}
-					swipeOut={swipeOut}
-					onLoadLetters={handleLoadLetters}
-					lastLetterId={letters[letters.length - 1].id}
-				>
-					흘려 보내기
-				</SendAwayButton>
+				{letters.length ? (
+					<SendAwayButton
+						initializePosition={initializePosition}
+						swipeIn={swipeIn}
+						swipeOut={swipeOut}
+						onLoadLetters={handleLoadLetters}
+						lastLetterId={letters[letters.length - 1].id}
+					>
+						흘려 보내기
+					</SendAwayButton>
+				) : (
+					<p className={styles.noLetters}>떠밀려 온 편지가 없습니다.</p>
+				)}
 			</div>
 		</section>
 	);
