@@ -3,3 +3,8 @@ export interface Letter {
 	letter: string;
 	sentAt: string;
 }
+
+export interface State {
+	success: boolean;
+	error: string | null;
+}

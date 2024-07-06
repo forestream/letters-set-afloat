@@ -1,0 +1,33 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	padding: 24px;
+	background-color: white;
+	border-radius: 8px;
+	gap: 16px;
+	max-width: 400px;
+	width: 40vw;
+}
+
+.message {
+	resize: none;
+	height: 200px;
+	font-size: 16px;
+	font-family: initial;
+	padding: 8px;
+}
+
+.send {
+	border: none;
+	background: none;
+	font-size: 16px;
+	cursor: pointer;
+	padding: 8px 16px;
+	width: 50%;
+	border-radius: 8px;
+	align-self: center;
+
+	&:hover {
+		background-color: #f7f7f7;
+	}
+}
