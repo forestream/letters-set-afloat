@@ -70,3 +70,15 @@ export async function loadLettersWithCursor(lastId: string) {
 
 	return { success: true, error: null, data: letters };
 }
+
+export async function reportLetter(letterId: string) {
+	try {
+		await addDoc(collection(db, "reports"), {
+			letterId,
+			sentAt: Timestamp.now(),
+		});
+		return { success: true, error: null };
+	} catch (error) {
+		return { success: false, error };
+	}
+}
