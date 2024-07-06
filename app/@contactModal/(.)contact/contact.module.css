@@ -5,6 +5,7 @@
 	background-color: white;
 	border-radius: 8px;
 	gap: 16px;
+	min-width: 300px;
 	max-width: 400px;
 	width: 40vw;
 }
