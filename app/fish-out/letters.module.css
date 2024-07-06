@@ -10,20 +10,30 @@
 	overflow-x: scroll;
 	scrollbar-width: none;
 	display: flex;
-	justify-content: flex-start;
-	scroll-snap-type: x mandatory;
+	justify-content: center;
 }
 
 .letters {
-	scroll-snap-align: center;
 	max-width: 960px;
-	margin: 0 50vw;
+	width: 100vw;
 	flex-shrink: 0;
 	padding: 60px 20px 20px;
 	display: flex;
 	gap: 60px 48px;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
+	transform: translateX(50%);
+	opacity: 0;
+	transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+
+	&.mount {
+		opacity: 1;
+		transform: translateX(0%);
+	}
+	&.unmount {
+		opacity: 0;
+		transform: translateX(-50%);
+	}
 }
 
 .letter {
