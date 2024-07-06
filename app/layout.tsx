@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import Link from "next/link";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,20 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ko">
+			{/* <!-- Google tag (gtag.js) --> */}
+			<Script
+				async
+				src="https://www.googletagmanager.com/gtag/js?id=G-X7LXFG3H2K"
+			></Script>
+			<Script id="google-tag" strategy="afterInteractive">
+				{`
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+
+				gtag('config', 'G-X7LXFG3H2K');
+				`}
+			</Script>
 			<body className={inter.className}>
 				{children}
 				{contactModal}
