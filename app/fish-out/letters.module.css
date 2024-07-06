@@ -67,3 +67,9 @@
 	margin: 24px 0;
 	width: 100%;
 }
+
+.noLetters {
+	color: white;
+	font-weight: 700;
+	font-size: 16px;
+}
