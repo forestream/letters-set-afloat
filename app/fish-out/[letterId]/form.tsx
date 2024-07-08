@@ -28,7 +28,7 @@ export default function Form({
 
 		if (state.success) {
 			ref.current.reset();
-			router.back();
+			router.refresh();
 		}
 	}, [state, router]);
 

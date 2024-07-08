@@ -1,4 +1,4 @@
-import Modal from "../../../ui/modal";
+import Modal from "@/app/ui/modal";
 import LetterById from "@/app/fish-out/[letterId]/letter-by-id";
 
 interface PageProps {
