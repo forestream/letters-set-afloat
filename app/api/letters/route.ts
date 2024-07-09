@@ -3,12 +3,11 @@ import { Timestamp, addDoc, collection } from "firebase/firestore";
 
 export async function POST(request: Request) {
 	const body = await request.json();
-	const letter = JSON.stringify(body.letter);
 
 	try {
 		await addDoc(collection(db, "letters"), {
 			sentAt: Timestamp.now(),
-			letter,
+			letter: body.letter,
 		});
 
 		return new Response(null, {
