@@ -53,8 +53,6 @@ export default function Letters({ letters: initLetters }: LettersProps) {
 		setLetters(() => next);
 	};
 
-	console.log(letters);
-
 	return (
 		<section className={styles.outer}>
 			<div className={styles.lettersContainer}>
