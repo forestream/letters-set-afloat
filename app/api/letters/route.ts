@@ -15,6 +15,7 @@ export async function POST(request: Request) {
 			statusText: "Created",
 		});
 	} catch (error: any) {
+		console.log(error);
 		return new Response("Error adding document: " + error, {
 			status: 400,
 			statusText: "Bad Request",

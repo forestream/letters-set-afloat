@@ -30,21 +30,23 @@ export default async function LetterById({ letterId }: LetterByIdProps) {
 
 	return (
 		<div className={styles.outer}>
-			<p className={styles.letter}>{letter.letter}</p>
-			<div className={styles.replies}>
-				{letter.replies.map((reply) => (
-					<p key={reply.id} className={styles.reply}>
-						{reply.reply}
-					</p>
-				))}
+			<div className={styles.inner}>
+				<p className={styles.letter}>{letter.letter}</p>
+				<div className={styles.replies}>
+					{letter.replies.map((reply) => (
+						<p key={reply.id} className={styles.reply}>
+							{reply.reply}
+						</p>
+					))}
+				</div>
+				<div className={styles.report}>
+					<ReportButton />
+				</div>
+				<Form letterId={letterId}>
+					<textarea className={styles.replyInput} name="reply" />
+					<ReplyButton />
+				</Form>
 			</div>
-			<div className={styles.report}>
-				<ReportButton />
-			</div>
-			<Form letterId={letterId}>
-				<textarea className={styles.replyInput} name="reply" />
-				<ReplyButton />
-			</Form>
 		</div>
 	);
 }

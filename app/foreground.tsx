@@ -42,8 +42,8 @@ export default function Foreground() {
 			setLetter("");
 			showToast();
 		} catch (error: any) {
-			setError(error);
-			console.error("Error: " + error);
+			setError(String(error));
+			console.error(error);
 		} finally {
 			setIsPending(false);
 		}
