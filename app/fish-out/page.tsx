@@ -32,3 +32,6 @@ export default async function FishOut() {
 		</>
 	);
 }
+
+export const revalidate = false;
+// false | 0 | number
