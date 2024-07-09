@@ -5,13 +5,19 @@
 	max-width: 700px;
 	width: 100%;
 	min-height: 30vh;
+}
+
+.inner {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
+	overflow-y: scroll;
+	scrollbar-width: none;
+	height: 100%;
 }
 
 .letter {
-	height: 100%;
+	white-space: pre-wrap;
 }
 
 .reply {
