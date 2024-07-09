@@ -63,7 +63,9 @@ export default function Letters({ letters: initLetters }: LettersProps) {
 							href={`/fish-out/${letter.id}`}
 							className={styles.letterLink}
 						>
-							<article className={styles.letter}>{letter.letter}</article>
+							<article className={styles.letter}>
+								<p className={styles.letterText}>{letter.letter}</p>
+							</article>
 						</Link>
 					))}
 				</div>

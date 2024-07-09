@@ -54,6 +54,11 @@
 	}
 }
 
+.letterText {
+	height: 100%;
+	overflow: hidden;
+}
+
 .letterLink {
 	text-decoration: none;
 	color: initial;
