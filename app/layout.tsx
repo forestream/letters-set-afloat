@@ -40,9 +40,17 @@ export default function RootLayout({
 				{children}
 				{contactModal}
 				<div className={styles.footer}>
-					<Link href="/contact" className={styles.contact}>
-						문의
-					</Link>
+					<div className={styles.contact}>
+						<Link
+							className={styles.link}
+							href="https://www.instagram.com/letterssetafloat_/"
+						>
+							인스타그램
+						</Link>
+						<Link className={styles.link} href="/contact">
+							문의
+						</Link>
+					</div>
 				</div>
 			</body>
 		</html>
