@@ -12,13 +12,14 @@
 	position: absolute;
 	right: 12px;
 	bottom: 12px;
-	background: none;
+}
+
+.link {
 	color: white;
 	font-size: 14px;
 	font-weight: 600;
 	cursor: pointer;
 	padding: 8px;
-	border: none;
 	text-decoration: none;
 
 	&:hover {
