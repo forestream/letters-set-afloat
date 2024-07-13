@@ -18,6 +18,7 @@
 .buttons {
 	display: flex;
 	justify-content: flex-end;
+	position: relative;
 }
 
 .button {
@@ -31,4 +32,20 @@
 	&:hover {
 		background-color: #efefef;
 	}
+}
+
+.spinner {
+	width: 14px;
+	height: 14px;
+}
+
+.error {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	transform: translateY(100%);
+	font-size: 12px;
+	font-family: initial;
+	font-weight: 500;
+	color: #878787;
 }

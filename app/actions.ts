@@ -79,7 +79,7 @@ export async function reportLetter(letterId: string) {
 		});
 		return { success: true, error: null };
 	} catch (error) {
-		return { success: false, error };
+		return { success: false, error: String(error) };
 	}
 }
 
