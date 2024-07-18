@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/lib/firebase/firebase";
+import { auth, db } from "@/lib/firebase/firebase";
 import {
 	Timestamp,
 	addDoc,
@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { Letter, State } from "./actions.type";
 import { revalidatePath } from "next/cache";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 
 export async function replyToLetter(
 	letterId: string,
@@ -93,4 +94,24 @@ export async function leaveContact(state: State, formData: FormData) {
 	} catch (error) {
 		return { ...state, success: false, error: String(error) };
 	}
+}
+
+export async function loginOnServer(idToken: string) {
+	const credential = GoogleAuthProvider.credential(idToken);
+
+	// Sign in with credential from the Google user.
+	signInWithCredential(auth, credential)
+		.then((result) => {
+			console.log(result.user);
+		})
+		.catch((error) => {
+			// Handle Errors here.
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			// The email of the user's account used.
+			const email = error.email;
+			// The credential that was used.
+			const credential = GoogleAuthProvider.credentialFromError(error);
+			console.log("Error: " + errorCode, errorMessage, email, credential);
+		});
 }
