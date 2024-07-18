@@ -1,10 +1,9 @@
-import styles from "./layout.module.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import Link from "next/link";
 import Script from "next/script";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,19 +38,7 @@ export default function RootLayout({
 			<body className={inter.className}>
 				{children}
 				{contactModal}
-				<div className={styles.footer}>
-					<div className={styles.contact}>
-						<Link
-							className={styles.link}
-							href="https://www.instagram.com/letterssetafloat_/"
-						>
-							인스타그램
-						</Link>
-						<Link className={styles.link} href="/contact">
-							문의
-						</Link>
-					</div>
-				</div>
+				<Footer />
 			</body>
 		</html>
 	);
