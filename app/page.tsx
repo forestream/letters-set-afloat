@@ -17,7 +17,7 @@ export default function Home() {
 				`}
 			</Script>
 
-			<main className={styles.main}>
+			<main className="h-screen bg-black relative">
 				<Background />
 				<Foreground />
 			</main>
