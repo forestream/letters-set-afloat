@@ -18,7 +18,7 @@ export default function Foreground() {
 	const [error, setError] = useState("");
 	const [Toast, showToast] = useToast(4000);
 
-	const longEnough = letter.trim().length > 4;
+	const longEnough = letter.trim().length > 0;
 
 	const handleChange: ChangeEventHandler = (e) => {
 		if (longEnough) setError("");
@@ -29,7 +29,7 @@ export default function Foreground() {
 		e.preventDefault();
 
 		if (!longEnough) {
-			setError("5 글자 이상 입력해주세요.");
+			setError("내용을 입력해주세요.");
 			return;
 		}
 
