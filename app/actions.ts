@@ -104,32 +104,38 @@ export async function loginOnServer(idToken: string) {
 	const credential = GoogleAuthProvider.credential(idToken);
 
 	// Sign in with credential from the Google user.
-	signInWithCredential(auth, credential)
-		.then(() => {
-			revalidatePath("/");
-		})
-		.catch((error) => {
-			// Handle Errors here.
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// The email of the user's account used.
-			const email = error.email;
-			// The credential that was used.
-			const credential = GoogleAuthProvider.credentialFromError(error);
-			console.log("Error: " + errorCode, errorMessage, email, credential);
-		});
+	try {
+		const result = await signInWithCredential(auth, credential);
+		const { uid, email, displayName, photoURL: profileImage } = result.user;
+		return {
+			success: true,
+			error: null,
+			data: {
+				uid,
+				email,
+				displayName,
+				profileImage,
+			},
+		};
+	} catch (error: any) {
+		// Handle Errors here.
+		const errorCode = error.code;
+		const errorMessage = error.message;
+		// The email of the user's account used.
+		const email = error.email;
+		// The credential that was used.
+		const credential = GoogleAuthProvider.credentialFromError(error);
+
+		return {
+			success: false,
+			error: "Error: " + errorCode + errorMessage + email + credential,
+			data: null,
+		};
+	}
 }
 
 export async function getUser() {
-	// onAuthStateChanged(auth, (user) => {
-	// 	if (user) {
-	// 		console.log(user);
-	// 	} else {
-	// 	}
-	// });
 	if (auth.currentUser) {
-		revalidatePath("/");
-
 		return {
 			email: auth.currentUser.email,
 			uid: auth.currentUser.uid,
@@ -138,5 +144,14 @@ export async function getUser() {
 		};
 	} else {
 		return null;
+	}
+}
+
+export async function removeUser() {
+	try {
+		auth.signOut();
+		return { success: true, error: null };
+	} catch (error) {
+		return { success: false, error };
 	}
 }

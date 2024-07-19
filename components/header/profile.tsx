@@ -1,14 +1,17 @@
 import { User } from "@/app/actions.type";
 import Image from "next/image";
+import ProfileOptions from "./profile-options";
+import { useState } from "react";
 
 interface ProfileProps {
 	user: User;
+	handleUser: (value: User | null) => void;
 }
 
-export default function Profile({ user }: ProfileProps) {
+export default function Profile({ user, handleUser }: ProfileProps) {
 	return (
 		<>
-			<div className="w-8 h-8 rounded-full relative bg-neutral-100 flex items-center justify-center">
+			<div className="w-7 h-7 rounded-full relative bg-neutral-100 flex items-center justify-center">
 				{user.profileImage ? (
 					<Image
 						src={user.profileImage}
@@ -22,9 +25,7 @@ export default function Profile({ user }: ProfileProps) {
 					</span>
 				)}
 			</div>
-			<ul className="absolute bottom-0 right-0 translate-y-full w-max">
-				<li className="hover:bg-button-hover px-4 py-2 rounded">로그아웃</li>
-			</ul>
+			{true && <ProfileOptions handleUser={handleUser} />}
 		</>
 	);
 }

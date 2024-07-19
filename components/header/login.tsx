@@ -2,7 +2,6 @@
 
 import { getUser, loginOnServer } from "@/app/actions";
 import { User } from "@/app/actions.type";
-import Image from "next/image";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import Profile from "./profile";
@@ -18,8 +17,14 @@ interface LoginProps {
 export default function Login({ className }: LoginProps) {
 	const [user, setUser] = useState<User | null>(null);
 
-	const handleCredentialResponse = (response: any) => {
-		loginOnServer(response.credential);
+	const getUserAsync = async () => {
+		const user = await getUser();
+		setUser(user);
+	};
+
+	const handleCredentialResponse = async (response: any) => {
+		const result = await loginOnServer(response.credential);
+		setUser(result.data);
 	};
 
 	const handleLogin = () => {
@@ -31,23 +36,18 @@ export default function Login({ className }: LoginProps) {
 		google.accounts.id.prompt(); // also display the One Tap dialog
 	};
 
-	const getUserAsync = async () => {
-		const user = await getUser();
-		setUser(user);
-	};
-
 	useEffect(() => {
 		getUserAsync();
 	}, []);
 
-	console.log(user);
+	const handleUser = (value: User | null) => setUser(value);
 
 	return (
 		<>
 			<Script src="https://accounts.google.com/gsi/client" />
 			{user ? (
 				<button className={className}>
-					<Profile user={user} />
+					<Profile user={user} handleUser={handleUser} />
 				</button>
 			) : (
 				<button onClick={handleLogin} className={className}>
