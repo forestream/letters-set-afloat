@@ -6,9 +6,10 @@ import { useState } from "react";
 interface ProfileProps {
 	user: User;
 	handleUser: (value: User | null) => void;
+	className: string;
 }
 
-export default function Profile({ user, handleUser }: ProfileProps) {
+export default function Profile({ user, handleUser, className }: ProfileProps) {
 	const [optionOpen, setOptionOpen] = useState(false);
 
 	const handleToggleOption = () => setOptionOpen((prev) => !prev);
@@ -16,11 +17,8 @@ export default function Profile({ user, handleUser }: ProfileProps) {
 	const handleCloseOption = () => setOptionOpen(false);
 
 	return (
-		<>
-			<div
-				onClick={handleToggleOption}
-				className="w-7 h-7 rounded-full relative bg-neutral-100 flex items-center justify-center"
-			>
+		<button onClick={handleToggleOption} className={className}>
+			<div className="w-7 h-7 rounded-full relative bg-neutral-100 flex items-center justify-center">
 				{user.profileImage ? (
 					<Image
 						src={user.profileImage}
@@ -37,6 +35,6 @@ export default function Profile({ user, handleUser }: ProfileProps) {
 			{optionOpen && (
 				<ProfileOptions onUser={handleUser} onCloseOption={handleCloseOption} />
 			)}
-		</>
+		</button>
 	);
 }

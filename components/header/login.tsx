@@ -46,9 +46,7 @@ export default function Login({ className }: LoginProps) {
 		<>
 			<Script src="https://accounts.google.com/gsi/client" />
 			{user ? (
-				<button className={className}>
-					<Profile user={user} handleUser={handleUser} />
-				</button>
+				<Profile user={user} handleUser={handleUser} className={className} />
 			) : (
 				<button onClick={handleLogin} className={className}>
 					구글 로그인
