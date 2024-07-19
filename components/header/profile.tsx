@@ -9,9 +9,18 @@ interface ProfileProps {
 }
 
 export default function Profile({ user, handleUser }: ProfileProps) {
+	const [optionOpen, setOptionOpen] = useState(false);
+
+	const handleToggleOption = () => setOptionOpen((prev) => !prev);
+
+	const handleCloseOption = () => setOptionOpen(false);
+
 	return (
 		<>
-			<div className="w-7 h-7 rounded-full relative bg-neutral-100 flex items-center justify-center">
+			<div
+				onClick={handleToggleOption}
+				className="w-7 h-7 rounded-full relative bg-neutral-100 flex items-center justify-center"
+			>
 				{user.profileImage ? (
 					<Image
 						src={user.profileImage}
@@ -25,7 +34,9 @@ export default function Profile({ user, handleUser }: ProfileProps) {
 					</span>
 				)}
 			</div>
-			{true && <ProfileOptions handleUser={handleUser} />}
+			{optionOpen && (
+				<ProfileOptions onUser={handleUser} onCloseOption={handleCloseOption} />
+			)}
 		</>
 	);
 }
