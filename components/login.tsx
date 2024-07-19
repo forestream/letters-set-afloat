@@ -1,7 +1,11 @@
 "use client";
 
-import { loginOnServer } from "@/app/actions";
+import { getUser, loginOnServer } from "@/app/actions";
+import { User } from "@/app/actions.type";
+import Image from "next/image";
 import Script from "next/script";
+import { useEffect, useState } from "react";
+import Profile from "./profile";
 
 declare global {
 	var google: any;
@@ -12,8 +16,9 @@ interface LoginProps {
 }
 
 export default function Login({ className }: LoginProps) {
+	const [user, setUser] = useState<User | null>(null);
+
 	const handleCredentialResponse = (response: any) => {
-		console.log(response);
 		loginOnServer(response.credential);
 	};
 
@@ -26,12 +31,29 @@ export default function Login({ className }: LoginProps) {
 		google.accounts.id.prompt(); // also display the One Tap dialog
 	};
 
+	const getUserAsync = async () => {
+		const user = await getUser();
+		setUser(user);
+	};
+
+	useEffect(() => {
+		getUserAsync();
+	}, []);
+
+	console.log(user);
+
 	return (
 		<>
 			<Script src="https://accounts.google.com/gsi/client" />
-			<button onClick={handleLogin} className={className}>
-				구글 로그인
-			</button>
+			{user ? (
+				<button className={className}>
+					<Profile user={user} />
+				</button>
+			) : (
+				<button onClick={handleLogin} className={className}>
+					구글 로그인
+				</button>
+			)}
 		</>
 	);
 }

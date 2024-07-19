@@ -16,7 +16,11 @@ import {
 } from "firebase/firestore";
 import { Letter, State } from "./actions.type";
 import { revalidatePath } from "next/cache";
-import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import {
+	GoogleAuthProvider,
+	onAuthStateChanged,
+	signInWithCredential,
+} from "firebase/auth";
 
 export async function replyToLetter(
 	letterId: string,
@@ -101,8 +105,8 @@ export async function loginOnServer(idToken: string) {
 
 	// Sign in with credential from the Google user.
 	signInWithCredential(auth, credential)
-		.then((result) => {
-			console.log(result.user);
+		.then(() => {
+			revalidatePath("/");
 		})
 		.catch((error) => {
 			// Handle Errors here.
@@ -114,4 +118,25 @@ export async function loginOnServer(idToken: string) {
 			const credential = GoogleAuthProvider.credentialFromError(error);
 			console.log("Error: " + errorCode, errorMessage, email, credential);
 		});
+}
+
+export async function getUser() {
+	// onAuthStateChanged(auth, (user) => {
+	// 	if (user) {
+	// 		console.log(user);
+	// 	} else {
+	// 	}
+	// });
+	if (auth.currentUser) {
+		revalidatePath("/");
+
+		return {
+			email: auth.currentUser.email,
+			uid: auth.currentUser.uid,
+			displayName: auth.currentUser.displayName,
+			profileImage: auth.currentUser.photoURL,
+		};
+	} else {
+		return null;
+	}
 }
