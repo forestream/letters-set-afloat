@@ -25,9 +25,6 @@ export default async function FishOut() {
 
 	return (
 		<>
-			<Link href="/" className={styles.backToMain}>
-				띄워 보낸 편지
-			</Link>
 			<Letters letters={letters} />
 		</>
 	);
