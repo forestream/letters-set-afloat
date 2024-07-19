@@ -12,6 +12,7 @@ import Link from "next/link";
 import Spinner from "./ui/spinner";
 import useToast from "@/lib/hooks/useToast";
 import Login from "@/components/login";
+import Header from "@/components/header";
 
 export default function Foreground() {
 	const [letter, setLetter] = useState("");
@@ -52,10 +53,6 @@ export default function Foreground() {
 
 	return (
 		<div className={styles.outer}>
-			<Login />
-			<Link href="/fish-out" className={styles.fishOut}>
-				떠밀려 온 편지
-			</Link>
 			<form onSubmit={handleSubmit} className={styles.form}>
 				<textarea
 					name="letter"

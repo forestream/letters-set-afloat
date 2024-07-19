@@ -6,7 +6,11 @@ module.exports = {
 		"./app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				"button-hover": "rgba(255, 255, 255, 0.2)",
+			},
+		},
 	},
 	plugins: [],
 };

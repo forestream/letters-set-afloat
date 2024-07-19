@@ -15,11 +15,8 @@ export default function Home() {
 				});
 				`}
 			</Script>
-
-			<main className="h-screen bg-black relative">
-				<Background />
-				<Foreground />
-			</main>
+			<Background />
+			<Foreground />
 		</>
 	);
 }

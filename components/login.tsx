@@ -7,7 +7,11 @@ declare global {
 	var google: any;
 }
 
-export default function Login() {
+interface LoginProps {
+	className: string;
+}
+
+export default function Login({ className }: LoginProps) {
 	const handleCredentialResponse = (response: any) => {
 		console.log(response);
 		loginOnServer(response.credential);
@@ -25,8 +29,8 @@ export default function Login() {
 	return (
 		<>
 			<Script src="https://accounts.google.com/gsi/client" />
-			<button onClick={handleLogin} className="text-white">
-				로그인
+			<button onClick={handleLogin} className={className}>
+				구글 로그인
 			</button>
 		</>
 	);

@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import Script from "next/script";
 import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,9 +37,12 @@ export default function RootLayout({
 				`}
 			</Script>
 			<body className={inter.className}>
-				{children}
-				{contactModal}
-				<Footer />
+				<main className="h-screen bg-black relative">
+					<Header />
+					{children}
+					{contactModal}
+					<Footer />
+				</main>
 			</body>
 		</html>
 	);
