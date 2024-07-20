@@ -1,9 +1,15 @@
 "use client";
 
-import { getUser } from "@/app/actions";
-import { User } from "@/app/actions.type";
+import { FrontUser } from "@/app/actions.type";
 import { useEffect, useState } from "react";
 import Profile from "./profile";
+import { auth } from "@/lib/firebase/firebase";
+import {
+	GoogleAuthProvider,
+	onAuthStateChanged,
+	signInWithCredential,
+} from "firebase/auth";
+import getGoogleCredential from "@/lib/utils/get-google-credential";
 
 declare global {
 	var google: any;
@@ -15,38 +21,56 @@ interface LoginProps {
 }
 
 export default function Login({ className }: LoginProps) {
-	const [user, setUser] = useState<User | null>(null);
-
-	const getUserAsync = async () => {
-		const user = await getUser();
-		setUser(user);
-	};
+	const [user, setUser] = useState<FrontUser | null>(null);
 
 	const handleCredentialResponse = (result: any) => {
-		console.log(result);
+		signInWithCredential(
+			auth,
+			GoogleAuthProvider.credential(result.credential)
+		);
 	};
 
 	useEffect(() => {
-		const oneTapLogin = () => {
-			google.accounts.id.initialize({
-				client_id:
-					"713412924199-gprgb7jbbojjct6jjka8ah2hmu648kv4.apps.googleusercontent.com",
-				callback: handleCredentialResponse,
-				ux_mode: "redirect",
-			});
-			google.accounts.id.prompt();
-		};
+		google.accounts.id.initialize({
+			client_id:
+				"713412924199-gprgb7jbbojjct6jjka8ah2hmu648kv4.apps.googleusercontent.com",
+			callback: handleCredentialResponse,
+			ux_mode: "redirect",
+			login_uri: process.env.NEXT_PUBLIC_BASE_URL + "/auth",
+		});
 
-		oneTapLogin();
-		getUserAsync();
+		onAuthStateChanged(auth, (user) => {
+			console.log(user);
+			if (user) {
+				setUser(() => ({
+					email: user.email,
+					displayName: user.displayName,
+					photoURL: user.photoURL,
+					uid: user.uid,
+				}));
+			} else if (getGoogleCredential()) {
+				signInWithCredential(
+					auth,
+					GoogleAuthProvider.credential(getGoogleCredential())
+				);
+			} else {
+				setUser(null);
 
-		google.accounts.id.renderButton(document.getElementById("gsi-button"), {
-			type: "icon",
-			shape: "circle",
+				google.accounts.id.prompt();
+			}
 		});
 	}, []);
 
-	const handleUser = (value: User | null) => setUser(value);
+	useEffect(() => {
+		if (!user) {
+			google.accounts.id.renderButton(document.getElementById("gsi-button"), {
+				type: "icon",
+				shape: "circle",
+			});
+		}
+	}, [user]);
+
+	const handleUser = (value: FrontUser | null) => setUser(value);
 
 	return (
 		<>

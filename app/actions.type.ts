@@ -9,9 +9,9 @@ export interface State {
 	error: string | null;
 }
 
-export interface User {
+export interface FrontUser {
 	email: string | null;
 	uid: string;
 	displayName: string | null;
-	profileImage: string | null;
+	photoURL: string | null;
 }

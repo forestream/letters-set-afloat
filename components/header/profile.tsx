@@ -1,11 +1,11 @@
-import { User } from "@/app/actions.type";
+import { FrontUser } from "@/app/actions.type";
 import Image from "next/image";
 import ProfileOptions from "./profile-options";
 import { useState } from "react";
 
 interface ProfileProps {
-	user: User;
-	handleUser: (value: User | null) => void;
+	user: FrontUser;
+	handleUser: (value: FrontUser | null) => void;
 	className: string;
 }
 
@@ -19,9 +19,9 @@ export default function Profile({ user, handleUser, className }: ProfileProps) {
 	return (
 		<button onClick={handleToggleOption} className={className}>
 			<div className="w-7 h-7 rounded-full relative bg-neutral-100 flex items-center justify-center">
-				{user.profileImage ? (
+				{user.photoURL ? (
 					<Image
-						src={user.profileImage}
+						src={user.photoURL}
 						alt="사용자 프로필"
 						fill
 						className="rounded-full"
