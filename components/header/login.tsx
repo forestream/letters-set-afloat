@@ -1,13 +1,13 @@
 "use client";
 
-import { getUser, loginOnServer } from "@/app/actions";
+import { getUser } from "@/app/actions";
 import { User } from "@/app/actions.type";
-import Script from "next/script";
 import { useEffect, useState } from "react";
 import Profile from "./profile";
 
 declare global {
 	var google: any;
+	var gapi: any;
 }
 
 interface LoginProps {
@@ -22,35 +22,38 @@ export default function Login({ className }: LoginProps) {
 		setUser(user);
 	};
 
-	const handleCredentialResponse = async (response: any) => {
-		const result = await loginOnServer(response.credential);
-		setUser(result.data);
-	};
-
-	const handleLogin = () => {
-		google.accounts.id.initialize({
-			client_id:
-				"713412924199-gprgb7jbbojjct6jjka8ah2hmu648kv4.apps.googleusercontent.com",
-			callback: handleCredentialResponse,
-		});
-		google.accounts.id.prompt(); // also display the One Tap dialog
+	const handleCredentialResponse = (result: any) => {
+		console.log(result);
 	};
 
 	useEffect(() => {
+		const oneTapLogin = () => {
+			google.accounts.id.initialize({
+				client_id:
+					"713412924199-gprgb7jbbojjct6jjka8ah2hmu648kv4.apps.googleusercontent.com",
+				callback: handleCredentialResponse,
+				ux_mode: "redirect",
+			});
+			google.accounts.id.prompt();
+		};
+
+		oneTapLogin();
 		getUserAsync();
+
+		google.accounts.id.renderButton(document.getElementById("gsi-button"), {
+			type: "icon",
+			shape: "circle",
+		});
 	}, []);
 
 	const handleUser = (value: User | null) => setUser(value);
 
 	return (
 		<>
-			<Script src="https://accounts.google.com/gsi/client" />
 			{user ? (
 				<Profile user={user} handleUser={handleUser} className={className} />
 			) : (
-				<button onClick={handleLogin} className={className}>
-					구글 로그인
-				</button>
+				<button id="gsi-button" className={className}></button>
 			)}
 		</>
 	);

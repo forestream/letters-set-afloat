@@ -36,6 +36,7 @@ export default function RootLayout({
 				gtag('config', 'G-X7LXFG3H2K');
 				`}
 			</Script>
+
 			<body className={inter.className}>
 				<main className="h-screen bg-black relative">
 					<Header />
@@ -43,6 +44,10 @@ export default function RootLayout({
 					{contactModal}
 					<Footer />
 				</main>
+				<Script
+					src="https://accounts.google.com/gsi/client"
+					strategy="beforeInteractive"
+				/>
 			</body>
 		</html>
 	);
