@@ -11,6 +11,8 @@ import { postLetter } from "@/lib/apis/main";
 import Link from "next/link";
 import Spinner from "./ui/spinner";
 import useToast from "@/lib/hooks/useToast";
+import Login from "@/components/header/login";
+import Header from "@/components/header/header";
 
 export default function Foreground() {
 	const [letter, setLetter] = useState("");
@@ -18,7 +20,7 @@ export default function Foreground() {
 	const [error, setError] = useState("");
 	const [Toast, showToast] = useToast(4000);
 
-	const longEnough = letter.trim().length > 4;
+	const longEnough = letter.trim().length > 0;
 
 	const handleChange: ChangeEventHandler = (e) => {
 		if (longEnough) setError("");
@@ -29,7 +31,7 @@ export default function Foreground() {
 		e.preventDefault();
 
 		if (!longEnough) {
-			setError("5 글자 이상 입력해주세요.");
+			setError("내용을 입력해주세요.");
 			return;
 		}
 
@@ -51,9 +53,6 @@ export default function Foreground() {
 
 	return (
 		<div className={styles.outer}>
-			<Link href="/fish-out" className={styles.fishOut}>
-				떠밀려 온 편지
-			</Link>
 			<form onSubmit={handleSubmit} className={styles.form}>
 				<textarea
 					name="letter"

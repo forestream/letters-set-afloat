@@ -1,10 +1,10 @@
-import styles from "./layout.module.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import Link from "next/link";
 import Script from "next/script";
+import Footer from "@/components/footer";
+import Header from "@/components/header/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,22 +36,18 @@ export default function RootLayout({
 				gtag('config', 'G-X7LXFG3H2K');
 				`}
 			</Script>
+
 			<body className={inter.className}>
-				{children}
-				{contactModal}
-				<div className={styles.footer}>
-					<div className={styles.contact}>
-						<Link
-							className={styles.link}
-							href="https://www.instagram.com/letterssetafloat_/"
-						>
-							인스타그램
-						</Link>
-						<Link className={styles.link} href="/contact">
-							문의
-						</Link>
-					</div>
-				</div>
+				<main className="h-screen bg-black relative">
+					<Header />
+					{children}
+					{contactModal}
+					<Footer />
+				</main>
+				<Script
+					src="https://accounts.google.com/gsi/client"
+					strategy="beforeInteractive"
+				/>
 			</body>
 		</html>
 	);

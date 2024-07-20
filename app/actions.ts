@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/lib/firebase/firebase";
+import { auth, db } from "@/lib/firebase/firebase";
 import {
 	Timestamp,
 	addDoc,
@@ -16,6 +16,11 @@ import {
 } from "firebase/firestore";
 import { Letter, State } from "./actions.type";
 import { revalidatePath } from "next/cache";
+import {
+	GoogleAuthProvider,
+	onAuthStateChanged,
+	signInWithCredential,
+} from "firebase/auth";
 
 export async function replyToLetter(
 	letterId: string,
@@ -92,5 +97,61 @@ export async function leaveContact(state: State, formData: FormData) {
 		return { ...state, success: true, error: null };
 	} catch (error) {
 		return { ...state, success: false, error: String(error) };
+	}
+}
+
+export async function loginOnServer(idToken: string) {
+	const credential = GoogleAuthProvider.credential(idToken);
+
+	// Sign in with credential from the Google user.
+	try {
+		const result = await signInWithCredential(auth, credential);
+		const { uid, email, displayName, photoURL: profileImage } = result.user;
+		return {
+			success: true,
+			error: null,
+			data: {
+				uid,
+				email,
+				displayName,
+				profileImage,
+			},
+		};
+	} catch (error: any) {
+		// Handle Errors here.
+		const errorCode = error.code;
+		const errorMessage = error.message;
+		// The email of the user's account used.
+		const email = error.email;
+		// The credential that was used.
+		const credential = GoogleAuthProvider.credentialFromError(error);
+
+		return {
+			success: false,
+			error: "Error: " + errorCode + errorMessage + email + credential,
+			data: null,
+		};
+	}
+}
+
+export async function getUser() {
+	if (auth.currentUser) {
+		return {
+			email: auth.currentUser.email,
+			uid: auth.currentUser.uid,
+			displayName: auth.currentUser.displayName,
+			profileImage: auth.currentUser.photoURL,
+		};
+	} else {
+		return null;
+	}
+}
+
+export async function removeUser() {
+	try {
+		auth.signOut();
+		return { success: true, error: null };
+	} catch (error) {
+		return { success: false, error };
 	}
 }
