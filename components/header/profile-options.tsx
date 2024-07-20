@@ -8,19 +8,13 @@ interface ProfileOptionsProps {
 	onCloseOption: () => void;
 }
 
-export default function ProfileOptions({
-	onUser,
-	onCloseOption,
-}: ProfileOptionsProps) {
+export default function ProfileOptions({ onCloseOption }: ProfileOptionsProps) {
 	const ref = useRef<HTMLUListElement>(null);
 
 	const handleLogout: MouseEventHandler = async (event) => {
 		event.stopPropagation();
 		document.cookie = "gc=";
 		auth.signOut();
-		// const result = await removeUser();
-		// console.log(result);
-		// onUser(null);
 	};
 
 	useEffect(() => {
