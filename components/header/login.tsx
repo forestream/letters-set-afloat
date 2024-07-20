@@ -40,7 +40,6 @@ export default function Login({ className }: LoginProps) {
 		});
 
 		onAuthStateChanged(auth, (user) => {
-			console.log(user);
 			if (user) {
 				setUser(() => ({
 					email: user.email,

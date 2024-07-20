@@ -9,7 +9,6 @@ export default function ClickListener({ children }: PropsWithChildren) {
 
 	const handleClick: MouseEventHandler = (e) => {
 		e.stopPropagation();
-		console.log("click");
 	};
 
 	return (
