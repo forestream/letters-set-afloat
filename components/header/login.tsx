@@ -9,7 +9,6 @@ import {
 	onAuthStateChanged,
 	signInWithCredential,
 } from "firebase/auth";
-import getGoogleCredential from "@/lib/utils/get-google-credential";
 
 declare global {
 	var google: any;
@@ -47,14 +46,8 @@ export default function Login({ className }: LoginProps) {
 					photoURL: user.photoURL,
 					uid: user.uid,
 				}));
-			} else if (getGoogleCredential()) {
-				signInWithCredential(
-					auth,
-					GoogleAuthProvider.credential(getGoogleCredential())
-				);
 			} else {
 				setUser(null);
-
 				google.accounts.id.prompt();
 			}
 		});
@@ -69,12 +62,10 @@ export default function Login({ className }: LoginProps) {
 		}
 	}, [user]);
 
-	const handleUser = (value: FrontUser | null) => setUser(value);
-
 	return (
 		<>
 			{user ? (
-				<Profile user={user} handleUser={handleUser} className={className} />
+				<Profile user={user} className={className} />
 			) : (
 				<button id="gsi-button" className={className}></button>
 			)}

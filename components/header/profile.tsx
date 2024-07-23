@@ -5,11 +5,10 @@ import { useState } from "react";
 
 interface ProfileProps {
 	user: FrontUser;
-	handleUser: (value: FrontUser | null) => void;
 	className: string;
 }
 
-export default function Profile({ user, handleUser, className }: ProfileProps) {
+export default function Profile({ user, className }: ProfileProps) {
 	const [optionOpen, setOptionOpen] = useState(false);
 
 	const handleToggleOption = () => setOptionOpen((prev) => !prev);
@@ -32,9 +31,7 @@ export default function Profile({ user, handleUser, className }: ProfileProps) {
 					</span>
 				)}
 			</div>
-			{optionOpen && (
-				<ProfileOptions onUser={handleUser} onCloseOption={handleCloseOption} />
-			)}
+			{optionOpen && <ProfileOptions onCloseOption={handleCloseOption} />}
 		</button>
 	);
 }
