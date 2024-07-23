@@ -1,5 +1,6 @@
 "use client";
 
+import { removeCredentialCookie } from "@/app/actions";
 import Spinner from "@/app/ui/spinner";
 import { auth } from "@/lib/firebase/firebase";
 import getGoogleCredential from "@/lib/utils/get-google-credential";
@@ -9,13 +10,14 @@ import { useEffect } from "react";
 
 export default function Page() {
 	useEffect(() => {
-		if (getGoogleCredential()) {
-			signInWithCredential(
-				auth,
-				GoogleAuthProvider.credential(getGoogleCredential())
-			);
-			redirect("/");
-		}
+		const waitRemoval = async () => await removeCredentialCookie();
+
+		signInWithCredential(
+			auth,
+			GoogleAuthProvider.credential(getGoogleCredential())
+		);
+		waitRemoval();
+		redirect("/");
 	}, []);
 
 	return (
