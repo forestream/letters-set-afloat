@@ -39,7 +39,7 @@ export default function Page() {
 				<Spinner />
 			</div>
 			{open && (
-				<Modal>
+				<Modal routerPath="/">
 					<div className="rounded-lg bg-white w-full max-w-[400px] p-8 text-center">
 						<p className="mb-8">구글 인증 토큰이 없습니다.</p>
 						<button
