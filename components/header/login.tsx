@@ -58,6 +58,7 @@ export default function Login({ className }: LoginProps) {
 			google.accounts.id.renderButton(document.getElementById("gsi-button"), {
 				type: "icon",
 				shape: "circle",
+				size: "medium",
 			});
 		}
 	}, [user]);
