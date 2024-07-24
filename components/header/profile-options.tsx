@@ -1,10 +1,7 @@
-import { removeUser } from "@/app/actions";
-import { FrontUser } from "@/app/actions.type";
 import { auth } from "@/lib/firebase/firebase";
 import { MouseEventHandler, useEffect, useRef } from "react";
 
 interface ProfileOptionsProps {
-	onUser: (value: FrontUser | null) => void;
 	onCloseOption: () => void;
 }
 
@@ -13,7 +10,6 @@ export default function ProfileOptions({ onCloseOption }: ProfileOptionsProps) {
 
 	const handleLogout: MouseEventHandler = async (event) => {
 		event.stopPropagation();
-		document.cookie = "gc=";
 		auth.signOut();
 	};
 

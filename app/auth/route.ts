@@ -6,7 +6,7 @@ export async function POST(request: Request) {
 		{},
 		{
 			status: 303,
-			headers: { Location: "/", "Set-Cookie": `gc=${credential}` },
+			headers: { Location: "/auth/signin", "Set-Cookie": `gc=${credential}` },
 		}
 	);
 }

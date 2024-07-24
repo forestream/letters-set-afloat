@@ -21,6 +21,7 @@ import {
 	onAuthStateChanged,
 	signInWithCredential,
 } from "firebase/auth";
+import { cookies } from "next/headers";
 
 export async function replyToLetter(
 	letterId: string,
@@ -147,11 +148,6 @@ export async function getUser() {
 	}
 }
 
-export async function removeUser() {
-	try {
-		auth.signOut();
-		return { success: true, error: null };
-	} catch (error) {
-		return { success: false, error };
-	}
+export async function removeCredentialCookie() {
+	cookies().delete("gc");
 }

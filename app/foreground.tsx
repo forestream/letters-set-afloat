@@ -8,11 +8,8 @@ import {
 } from "react";
 import styles from "./foreground.module.css";
 import { postLetter } from "@/lib/apis/main";
-import Link from "next/link";
 import Spinner from "./ui/spinner";
 import useToast from "@/lib/hooks/useToast";
-import Login from "@/components/header/login";
-import Header from "@/components/header/header";
 
 export default function Foreground() {
 	const [letter, setLetter] = useState("");
