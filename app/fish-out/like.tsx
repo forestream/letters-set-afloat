@@ -5,6 +5,7 @@ import { MouseEventHandler, useState } from "react";
 import { postLike } from "../actions";
 import { auth } from "@/lib/firebase/firebase";
 import Toast from "../ui/toast";
+import { createPortal } from "react-dom";
 
 export default function Like() {
 	const [liked, setLiked] = useState(false);
@@ -36,7 +37,7 @@ export default function Like() {
 					className={`hover:opacity-50 ${liked ? "opacity-100" : "opacity-20"}`}
 				/>
 			</div>
-			{toast && <Toast />}
+			{toast && createPortal(<Toast />, document.body)}
 		</>
 	);
 }
