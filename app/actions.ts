@@ -151,3 +151,7 @@ export async function getUser() {
 export async function removeCredentialCookie() {
 	cookies().delete("gc");
 }
+
+export async function postLike() {
+	return;
+}

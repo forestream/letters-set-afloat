@@ -13,6 +13,9 @@ module.exports = {
 			translate: {
 				"profile-menu": "calc(100% + 1rem)",
 			},
+			transitionProperty: {
+				toast: "opacity, transform",
+			},
 		},
 	},
 	plugins: [],
