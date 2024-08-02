@@ -10,10 +10,8 @@ export default function ReportButton() {
 	const handleClickReport = () => router.push(path + "/report");
 
 	return (
-		<>
-			<button onClick={handleClickReport} className={styles.reportButton}>
-				신고
-			</button>
-		</>
+		<button onClick={handleClickReport} className={styles.reportButton}>
+			신고
+		</button>
 	);
 }

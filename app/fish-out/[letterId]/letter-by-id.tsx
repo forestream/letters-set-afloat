@@ -4,6 +4,7 @@ import { db } from "@/lib/firebase/firebase";
 import Form from "./form";
 import ReplyButton from "./reply-button";
 import ReportButton from "./report-button";
+import Like from "../like";
 
 interface LetterByIdProps {
 	letterId: string;
@@ -40,6 +41,7 @@ export default async function LetterById({ letterId }: LetterByIdProps) {
 					))}
 				</div>
 				<div className={styles.report}>
+					<Like />
 					<ReportButton />
 				</div>
 				<Form letterId={letterId}>

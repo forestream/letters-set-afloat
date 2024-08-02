@@ -42,5 +42,9 @@
 }
 
 .report {
-	text-align: right;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	bottom: -16px;
 }

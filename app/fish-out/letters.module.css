@@ -48,6 +48,8 @@
 	box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.2);
 	cursor: pointer;
 	transition: box-shadow 0.1s ease-in-out;
+	display: flex;
+	flex-direction: column;
 
 	&:hover {
 		box-shadow: 8px 8px 12px 6px rgba(0, 0, 0, 0.3);

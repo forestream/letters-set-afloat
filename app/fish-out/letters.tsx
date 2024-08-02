@@ -6,6 +6,7 @@ import SendAwayButton from "./send-away-button";
 import { useEffect, useRef, useState } from "react";
 import { Letter } from "../actions.type";
 import { SWIPE_DUR } from "@/lib/constants/fish-out";
+import Like from "./like";
 
 interface LettersProps {
 	letters: Letter[];
@@ -65,6 +66,7 @@ export default function Letters({ letters: initLetters }: LettersProps) {
 						>
 							<article className={styles.letter}>
 								<p className={styles.letterText}>{letter.letter}</p>
+								<Like />
 							</article>
 						</Link>
 					))}
