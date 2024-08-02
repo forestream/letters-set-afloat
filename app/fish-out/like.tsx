@@ -7,7 +7,11 @@ import { auth } from "@/lib/firebase/firebase";
 import Toast from "../ui/toast";
 import { createPortal } from "react-dom";
 
-export default function Like() {
+interface LikeParams {
+	letterId: string;
+}
+
+export default function Like({ letterId }: LikeParams) {
 	const [liked, setLiked] = useState(false);
 	const [toast, setToast] = useState(false);
 
@@ -15,11 +19,9 @@ export default function Like() {
 		e.preventDefault();
 
 		if (auth.currentUser) {
-			console.log(auth.currentUser);
+			postLike(letterId, auth.currentUser.uid);
 			setLiked((prev) => !prev);
-			postLike();
 		} else if (!toast) {
-			console.log(auth.currentUser);
 			setToast(true);
 			setTimeout(() => {
 				setToast(false);

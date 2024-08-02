@@ -66,7 +66,7 @@ export default function Letters({ letters: initLetters }: LettersProps) {
 						>
 							<article className={styles.letter}>
 								<p className={styles.letterText}>{letter.letter}</p>
-								<Like />
+								<Like letterId={letter.id} />
 							</article>
 						</Link>
 					))}

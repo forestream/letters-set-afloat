@@ -16,11 +16,7 @@ import {
 } from "firebase/firestore";
 import { Letter, State } from "./actions.type";
 import { revalidatePath } from "next/cache";
-import {
-	GoogleAuthProvider,
-	onAuthStateChanged,
-	signInWithCredential,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { cookies } from "next/headers";
 
 export async function replyToLetter(
@@ -152,6 +148,15 @@ export async function removeCredentialCookie() {
 	cookies().delete("gc");
 }
 
-export async function postLike() {
-	return;
+export async function postLike(letterId: string, uid: string) {
+	console.log(letterId, uid);
+	try {
+		await addDoc(collection(db, "letters", letterId, "likes"), {
+			uid,
+			likedAt: Timestamp.now(),
+		});
+		return { success: true, error: null };
+	} catch (error) {
+		return { success: false, error: String(error) };
+	}
 }
