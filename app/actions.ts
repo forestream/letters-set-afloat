@@ -149,7 +149,6 @@ export async function removeCredentialCookie() {
 }
 
 export async function postLike(letterId: string, uid: string) {
-	console.log(letterId, uid);
 	try {
 		await addDoc(collection(db, "letters", letterId, "likes"), {
 			uid,

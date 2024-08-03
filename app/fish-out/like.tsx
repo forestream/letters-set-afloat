@@ -9,9 +9,10 @@ import { createPortal } from "react-dom";
 
 interface LikeParams {
 	letterId: string;
+	count: number;
 }
 
-export default function Like({ letterId }: LikeParams) {
+export default function Like({ letterId, count }: LikeParams) {
 	const [liked, setLiked] = useState(false);
 	const [toast, setToast] = useState(false);
 
@@ -31,13 +32,18 @@ export default function Like({ letterId }: LikeParams) {
 
 	return (
 		<>
-			<div className="w-6 h-6 relative cursor-pointer" onClick={handleLike}>
-				<Image
-					src={liked ? "/heart-on.svg" : "/heart-off.svg"}
-					alt="좋아요"
-					fill
-					className={`hover:opacity-50 ${liked ? "opacity-100" : "opacity-20"}`}
-				/>
+			<div className="flex gap-1.5 items-center">
+				<div className="w-5 h-5 relative cursor-pointer" onClick={handleLike}>
+					<Image
+						src={liked ? "/heart-on.svg" : "/heart-off.svg"}
+						alt="좋아요"
+						fill
+						className={`hover:opacity-50 ${
+							liked ? "opacity-100" : "opacity-20"
+						}`}
+					/>
+				</div>
+				<p className="text-neutral-500 text-sm font-medium">{count}</p>
 			</div>
 			{toast && createPortal(<Toast />, document.body)}
 		</>

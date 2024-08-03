@@ -2,6 +2,7 @@ export interface Letter {
 	id: string;
 	letter: string;
 	sentAt: string;
+	likeCount: number;
 }
 
 export interface State {

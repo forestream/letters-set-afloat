@@ -1,9 +1,15 @@
-import styles from "./page.module.css";
 import Letters from "./letters";
-import Link from "next/link";
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase/firebase";
 import { Letter } from "../actions.type";
+
+async function getLetters(letterId: string) {
+	const snapshot = await getDocs(collection(db, "letters", letterId, "likes"));
+
+	return snapshot.size;
+}
+
+async function getLikeState(letterId: string) {}
 
 export default async function FishOut() {
 	const first = query(
@@ -23,11 +29,14 @@ export default async function FishOut() {
 			} as Letter)
 	);
 
-	return (
-		<>
-			<Letters letters={letters} />
-		</>
+	const counts = await Promise.all(
+		letters.map((letter) => getLetters(letter.id))
 	);
-}
 
-export const revalidate = 60;
+	const lettersWithLikeCount = letters.map((letter, index) => ({
+		...letter,
+		likeCount: counts[index],
+	}));
+
+	return <Letters letters={lettersWithLikeCount} />;
+}
